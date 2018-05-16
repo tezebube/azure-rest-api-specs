@@ -1,0 +1,299 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2018-05-01-preview",
+        "title": "KeyVaultManagementClient",
+        "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault."
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/contacts/{categoryName}": {
+            "put": {
+                "tags": [
+                    "Contacts"
+                ],
+                "operationId": "Contacts_CreateOrUpdate",
+                "description": "Create or update contacts in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault contacts.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+                        "description": "Name of the vault"
+                    },
+                    {
+                        "name": "categoryName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{1,127}$",
+                        "description": "Type to register the contacts for. Must be set to \"certificates\"."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ContactsCreateOrUpdateParameters"
+                        },
+                        "description": "Parameters to create or update the contacts"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created or updated vault",
+                        "schema": {
+                            "$ref": "#/definitions/Contacts"
+                        }
+                    },
+                    "200": {
+                        "description": "Created or updated contacts",
+                        "schema": {
+                            "$ref": "#/definitions/Contacts"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Contacts"
+                ],
+                "operationId": "Contacts_Update",
+                "description": "Update contacts in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault contacts.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+                        "description": "Name of the vault"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ContactsPatchParameters"
+                        },
+                        "description": "Parameters to patch the contacts"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Patched contacts",
+                        "schema": {
+                            "$ref": "#/definitions/Contacts"
+                        }
+                    },
+                    "200": {
+                        "description": "Patched contacts",
+                        "schema": {
+                            "$ref": "#/definitions/Contacts"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "operationId": "Contacts_Get",
+                "description": "Gets the specified contacts.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault contacts.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the vault."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved contacts",
+                        "schema": {
+                            "$ref": "#/definitions/Contacts"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "ContactInfo" : {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "The contact email address"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The contact full name"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "The contact phone number"
+                }
+            },
+            "required": [
+                "email"
+            ]
+        },
+        "ContactsProperties": {
+            "properties": {
+                "contactInfos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ContactInfo"
+                    },
+                    "description": "The list of contact information"
+                }
+            },
+            "description": "Properties of the contacts"
+        },
+        "ContactsCreateOrUpdateParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The tags that will be assigned to the contacts. "
+                },
+                "properties": {
+                    "$ref": "#/definitions/ContactsProperties",
+                    "description": "Properties of the contacts"
+                }
+            },
+            "description": "Parameters for creating or updating contacts",
+            "required": [
+                "properties"
+            ],
+            "x-ms-azure-resource": true
+        },
+        "ContactsPatchParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The tags that will be assigned to the contacts. "
+                },
+                "properties": {
+                    "$ref": "#/definitions/ContactsProperties",
+                    "description": "Properties of the contacts"
+                }
+            },
+            "description": "Parameters for creating or updating contacts",
+            "x-ms-azure-resource": true
+        },
+        "Contacts": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ContactsProperties",
+                    "description": "Properties of the contacts"
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "allOf": [
+                {
+                    "$ref": "./keyvault.json#/definitions/Resource"
+                }
+            ],
+            "description": "Resource information with extended details."
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    }
+}

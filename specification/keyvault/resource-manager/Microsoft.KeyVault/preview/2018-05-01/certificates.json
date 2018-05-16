@@ -1,0 +1,477 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2018-05-01-preview",
+        "title": "KeyVaultManagementClient",
+        "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault."
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/certificates/{certificateName}": {
+            "put": {
+                "tags": [
+                    "Certificates"
+                ],
+                "operationId": "Certificates_CreateOrUpdate",
+                "description": "Create or update a certificate in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault certificates.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+                        "description": "Name of the vault"
+                    },
+                    {
+                        "name": "certificateName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{1,127}$",
+                        "description": "Name of the certificate"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CertificateCreateOrUpdateParameters"
+                        },
+                        "description": "Parameters to create or update the certificate"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created or updated vault",
+                        "schema": {
+                            "$ref": "#/definitions/Certificate"
+                        }
+                    },
+                    "200": {
+                        "description": "Created or updated certificate",
+                        "schema": {
+                            "$ref": "#/definitions/Certificate"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Certificates"
+                ],
+                "operationId": "Certificates_Update",
+                "description": "Update a certificate in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault certificates.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+                        "description": "Name of the vault"
+                    },
+                    {
+                        "name": "certificateName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{1,127}$",
+                        "description": "Name of the certificate"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CertificatePatchParameters"
+                        },
+                        "description": "Parameters to patch the certificate"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Patched certificate",
+                        "schema": {
+                            "$ref": "#/definitions/Certificate"
+                        }
+                    },
+                    "200": {
+                        "description": "Patched certificate",
+                        "schema": {
+                            "$ref": "#/definitions/Certificate"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "operationId": "Certificates_Get",
+                "description": "Gets the specified certificate.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault certificates.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the vault."
+                    },
+                    {
+                        "name": "certificateName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the certificate."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved certificate",
+                        "schema": {
+                            "$ref": "#/definitions/Certificate"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/certificates": {
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "operationId": "Certificates_List",
+                "description": "The List operation gets information about the certificates in a vault.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault certificates.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the vault."
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Maximum number of results to return."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get information about certificates in the specified vault.",
+                        "schema": {
+                            "$ref": "#/definitions/CertificateListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Attributes": {
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Determines whether the object is enabled."
+              },
+              "nbf": {
+                "x-ms-client-name": "NotBefore",
+                "type": "integer",
+                "readOnly": true,
+                "description": "Not before date in UTC."
+              },
+              "exp": {
+                "x-ms-client-name": "Expires",
+                "type": "integer",
+                "readOnly": true,
+                "description": "Expiry date in UTC."
+              },
+              "created": {
+                "type": "integer",
+                "readOnly": true,
+                "description": "Creation time in UTC."
+              },
+              "updated": {
+                "type": "integer",
+                "readOnly": true,
+                "description": "Last updated time in UTC."
+              }
+            },
+            "description": "The object attributes managed by the KeyVault service."
+        },
+        "CertificateProperties": {
+            "properties": {
+                "issuer": {
+                    "type": "string",
+                    "description": "A reference to the issuer of the certificate."
+                },
+                "subject": {
+                    "type": "string",
+                    "description": "The subject name of the certificate."
+                },
+                "validityInMonths": {
+                    "type": "integer",
+                    "description": "The validity period of the certificate."
+                },
+                "certificateTransparency": {
+                    "type": "boolean",
+                    "description": "Whether or not the certificate utilizes Certificate Transparency."
+                },
+                "renewAtLifetimePercentage": {
+                    "type": "integer",
+                    "description": "The lifetime percentage at which to automatically renew the certificate."
+                },
+                "emailAtLifetimePercentage": {
+                    "type": "integer",
+                    "description": "The lifetime percentage at which to send an email reminder to manually renew the certificate."
+                },
+                "attributes": {
+                    "$ref": "#/definitions/CertificateAttributes",
+                    "description": "The attributes of the certificate."
+                },
+                "certificateUri": {
+                    "type": "string",
+                    "description": "The URI to retrieve the current version of the certificate.",
+                    "readOnly": true
+                },
+                "certificateUriWithVersion": {
+                    "type": "string",
+                    "description": "The URI to retrieve the specific version of the certificate.",
+                    "readOnly": true
+                }
+            },
+            "description": "Properties of the certificate",
+            "required": [
+                "issuer",
+                "subject"
+            ]
+        },
+        "CertificatePatchProperties": {
+            "properties": {
+                "issuer": {
+                    "type": "string",
+                    "description": "A reference to the issuer of the certificate."
+                },
+                "subject": {
+                    "type": "string",
+                    "description": "The subject name of the certificate."
+                },
+                "validityInMonths": {
+                    "type": "integer",
+                    "description": "The validity period of the certificate."
+                },
+                "certificateTransparency": {
+                    "type": "boolean",
+                    "description": "The subject name of the certificate."
+                },
+                "renewAtLifetimePercentage": {
+                    "type": "integer",
+                    "description": "The lifetime percentage at which to automatically renew the certificate."
+                },
+                "emailAtLifetimePercentage": {
+                    "type": "integer",
+                    "description": "The lifetime percentage at which to send an email reminder to manually renew the certificate."
+                },
+                "attributes": {
+                    "$ref": "#/definitions/CertificateAttributes",
+                    "description": "The attributes of the certificate."
+                }
+            },
+            "description": "Properties of the certificate",
+            "required": [
+                "issuer",
+                "subject"
+            ]
+        },
+        "CertificateAttributes": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Attributes"
+                }
+            ],
+            "description": "The certificate management attributes."
+        },
+        "CertificateCreateOrUpdateParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The tags that will be assigned to the certificate. "
+                },
+                "properties": {
+                    "$ref": "#/definitions/CertificateProperties",
+                    "description": "Properties of the certificate"
+                }
+            },
+            "description": "Parameters for creating or updating a certificate",
+            "required": [
+                "properties"
+            ],
+            "x-ms-azure-resource": true
+        },
+        "CertificatePatchParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The tags that will be assigned to the certificate. "
+                },
+                "properties": {
+                    "$ref": "#/definitions/CertificatePatchProperties",
+                    "description": "Properties of the certificate"
+                }
+            },
+            "description": "Parameters for patching a certificate",
+            "x-ms-azure-resource": true
+        },
+        "Certificate": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/CertificateProperties",
+                    "description": "Properties of the certificate"
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "allOf": [
+                {
+                    "$ref": "./keyvault.json#/definitions/Resource"
+                }
+            ],
+            "description": "Resource information with extended details."
+        },
+        "CertificateListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Certificate"
+                    },
+                    "description": "The list of certificates."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URL to get the next set of certificates."
+                }
+            },
+            "description": "List of certificates"
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    }
+}

@@ -1,0 +1,474 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2018-05-01-preview",
+        "title": "KeyVaultManagementClient",
+        "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault."
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/issuers/{issuerName}": {
+            "put": {
+                "tags": [
+                    "Issuers"
+                ],
+                "operationId": "Issuers_CreateOrUpdate",
+                "description": "Create or update an issuer in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault issuers.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+                        "description": "Name of the vault"
+                    },
+                    {
+                        "name": "issuerName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{1,127}$",
+                        "description": "Name of the issuer"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IssuerCreateOrUpdateParameters"
+                        },
+                        "description": "Parameters to create or update the issuer"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created or updated vault",
+                        "schema": {
+                            "$ref": "#/definitions/Issuer"
+                        }
+                    },
+                    "200": {
+                        "description": "Created or updated issuer",
+                        "schema": {
+                            "$ref": "#/definitions/Issuer"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Issuers"
+                ],
+                "operationId": "Issuers_Update",
+                "description": "Update an issuer in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault issuers.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+                        "description": "Name of the vault"
+                    },
+                    {
+                        "name": "issuerName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9-]{1,127}$",
+                        "description": "Name of the issuer"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IssuerPatchParameters"
+                        },
+                        "description": "Parameters to patch the issuer"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Patched issuer",
+                        "schema": {
+                            "$ref": "#/definitions/Issuer"
+                        }
+                    },
+                    "200": {
+                        "description": "Patched issuer",
+                        "schema": {
+                            "$ref": "#/definitions/Issuer"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Issuers"
+                ],
+                "operationId": "Issuers_Get",
+                "description": "Gets the specified issuer.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault issuers.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the vault."
+                    },
+                    {
+                        "name": "issuerName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the issuer."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved issuer",
+                        "schema": {
+                            "$ref": "#/definitions/Issuer"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/issuers": {
+            "get": {
+                "tags": [
+                    "Issuers"
+                ],
+                "operationId": "Issuers_List",
+                "description": "The List operation gets information about the issuers in a vault.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault issuers.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Resource Group to which the vault belongs."
+                    },
+                    {
+                        "name": "vaultName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the vault."
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Maximum number of results to return."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get information about issuers in the specified vault.",
+                        "schema": {
+                            "$ref": "#/definitions/IssuerListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Attributes": {
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Determines whether the object is enabled."
+              },
+              "created": {
+                "type": "integer",
+                "readOnly": true,
+                "description": "Creation time in UTC."
+              },
+              "updated": {
+                "type": "integer",
+                "readOnly": true,
+                "description": "Last updated time in UTC."
+              }
+            },
+            "description": "The object attributes managed by the KeyVault service."
+        },
+        "IssuerProperties": {
+            "properties": {
+                "provider": {
+                    "type": "string",
+                    "description": "The provider type of the issuer."
+                },
+                "accountId": {
+                    "type": "string",
+                    "description": "The account ID registered with the external issuer."
+                },
+                "apiKey": {
+                    "type": "string",
+                    "description": "The API key registered with the external issuer."
+                },
+                "orgId": {
+                    "type": "string",
+                    "description": "The organization ID registered with the external issuer."
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The email address registered with the external issuer."
+                },
+                "firstname": {
+                    "type": "string",
+                    "description": "The first name registered with the external issuer."
+                },
+                "lastname": {
+                    "type": "string",
+                    "description": "The last name registered with the external issuer."
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "The phone number registered with the external issuer."
+                },
+                "attributes": {
+                    "$ref": "#/definitions/IssuerAttributes",
+                    "description": "The attributes of the issuer."
+                },
+                "issuerUri": {
+                    "type": "string",
+                    "description": "The URI to retrieve the current version of the issuer.",
+                    "readOnly": true
+                }
+            },
+            "description": "Properties of the issuer",
+            "required": [
+                "provider"
+            ]
+        },
+        "IssuerPatchProperties": {
+            "properties": {
+                "provider": {
+                    "type": "string",
+                    "description": "The provider type of the issuer."
+                },
+                "accountId": {
+                    "type": "string",
+                    "description": "The account ID registered with the external issuer."
+                },
+                "apiKey": {
+                    "type": "string",
+                    "description": "The API key registered with the external issuer."
+                },
+                "orgId": {
+                    "type": "string",
+                    "description": "The organization ID registered with the external issuer."
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The email address registered with the external issuer."
+                },
+                "firstname": {
+                    "type": "string",
+                    "description": "The first name registered with the external issuer."
+                },
+                "lastname": {
+                    "type": "string",
+                    "description": "The last name registered with the external issuer."
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "The phone number registered with the external issuer."
+                },
+                "attributes": {
+                    "$ref": "#/definitions/IssuerAttributes",
+                    "description": "The attributes of the issuer."
+                }
+            },
+            "description": "Properties of the issuer",
+            "required": [
+                "provider"
+            ]
+        },
+        "IssuerAttributes": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Attributes"
+                }
+            ],
+            "description": "The issuer management attributes."
+        },
+        "IssuerCreateOrUpdateParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The tags that will be assigned to the issuer. "
+                },
+                "properties": {
+                    "$ref": "#/definitions/IssuerProperties",
+                    "description": "Properties of the issuer"
+                }
+            },
+            "description": "Parameters for creating or updating an issuer",
+            "required": [
+                "properties"
+            ],
+            "x-ms-azure-resource": true
+        },
+        "IssuerPatchParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The tags that will be assigned to the issuer. "
+                },
+                "properties": {
+                    "$ref": "#/definitions/IssuerPatchProperties",
+                    "description": "Properties of the issuer"
+                }
+            },
+            "description": "Parameters for patching an issuer",
+            "x-ms-azure-resource": true
+        },
+        "Issuer": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/IssuerProperties",
+                    "description": "Properties of the issuer"
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "allOf": [
+                {
+                    "$ref": "./keyvault.json#/definitions/Resource"
+                }
+            ],
+            "description": "Resource information with extended details."
+        },
+        "IssuerListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Issuer"
+                    },
+                    "description": "The list of issuers."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URL to get the next set of issuers."
+                }
+            },
+            "description": "List of issuers"
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    }
+}

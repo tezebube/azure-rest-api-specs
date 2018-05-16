@@ -30,6 +30,21 @@ tag: package-2016-10
 ```
 
 
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-01-preview'
+input-file:
+- Microsoft.KeyVault/preview/2018-05-01/keyvault.json
+- Microsoft.KeyVault/preview/2018-05-01/providers.json
+- Microsoft.KeyVault/preview/2018-05-01/secrets.json
+- Microsoft.KeyVault/preview/2018-05-01/certificates.json
+- Microsoft.KeyVault/preview/2018-05-01/issuers.json
+- Microsoft.KeyVault/preview/2018-05-01/contacts.json
+```
+
+
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
@@ -126,8 +141,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-05
   - tag: package-2016-10
   - tag: package-2015-06
+```
+
+### Tag: package-2018-05 and go
+
+These settings apply only when `--tag=package-2018-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-05' && $(go)
+output-folder: $(go-sdk-folder)/services/keyvault/mgmt/2018-05-01/keyvault
 ```
 
 ### Tag: package-2016-10 and go
